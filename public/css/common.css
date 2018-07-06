@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+    -moz-outline: 0;
+    -moz-outline: none;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+.burger {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 30px;
+    width: 40px;
+    padding-top: 2px;
+    -webkit-user-select: none;
+    user-select: none;
+    display: block;
+}
+
+.burger input {
+    margin-top: 10px;
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+    -webkit-touch-callout: none;
+}
+
+.burger span.burger-line {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #cdcdcd;
+    border-radius: 3px;
+    z-index: 1;
+    opacity: 1;
+    transform-origin: 4px 0px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.8);    m1in-height: 300px;
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+}
+
+.burger input:checked ~ span.burger-line {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.burger input:checked ~ span.burger-line:nth-child(2) {
+    transform: rotate(90deg);
+    background-color: #bdbdbd;
+}
+
+.burger input:checked ~ span.burger-line:nth-child(3) {
+    transform: rotate(90deg) translateY(-30px) translateX(-8px);
+    background-color: #9d9d9d;
+}
+
+.burger input:checked ~ span.burger-line:nth-child(4) {
+    transform: translateY(-22px);
+    background-color: #adadad;
+}
+
+.burger input:checked ~ span.burger-line:nth-child(5) {
+    background-color: #8d8d8d;
+}
+
+.burger #burger_menu {
+    position: absolute;
+    background-color: rgba(50, 50, 50, 0.8);
+    border-radius: 10px 0 10px 10px;
+    top: -400px;
+    right: 0;
+    min-width: 180px;
+    z-index: 9999;
+    height: auto;
+    padding: 4px 0 2px 0;
+    transition: 1s;
+    display: block;
+    transition-timing-function: ease-out;
+    -webkit-font-smoothing: antialiased;
+    border: 1px solid #000;
+    opacity: 0;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.burger #burger_menu nav {padding:10px 0;margin:0;}
+.burger #burger_menu nav a { display: block; color: #fff; font-size: 20px; }
+.burger #burger_menu nav div a { font-style: italic; color: #ff0; font-size: 14px; }
+.burger #burger_menu nav a:hover {  background-color: rgba(255,255,255,0.2);}
+.burger #burger_menu nav a:hover {  background-color: rgba(255,255,255,0.1);}
+.burger input:checked ~ span#burger_menu { top: 50px; opacity: 1; }
+
+.thumbnail {
+    position: relative;
+    display: inline-block;
+    min-height: 240px;
+    max-height: 320px;
+    height: 100%;
+    min-width: 150px;
+    max-width: 270px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 30px;
+    margin: 0  0 80px 0;
+    padding: 0 0 80px 0;
+    color: #554e49;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.thumbnail:hover {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.thumbnail .image {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.thumbnail .image img {
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 20px;
+}
+
+.thumbnail .title {
+    text-align: center;
+    width: 100%;
+    font-size: 13px;
+    text-transform: uppercase;
+    line-height: 1.42857143;
+    margin-top: 8px;
+}
+
+
+.thumbnail .price {
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    line-height: 1.42857143;
+    color: #756e69;
+}
+
+a.thumbnail-link {
+    color: #000;
+}
+
+a.thumbnail-link:hover {
+    text-decoration: none;
+}
+
+.thumbnail-list {
+    position: relative;
+    text-align:center;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: -80px;
+}
+
+.body .thumbnail-list {
+    margin-top: 40px;
+}
+
+.target {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.multi-selectable .target.active,
+.selectable .target.active {
+    opacity: 1;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.7);
+}
+
+label[for="images"], .old_images {
+    position: relative;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    min-height: 120px;
+    width: 100%;
+    display: block;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+label[for="images"] img, .old_images img {
+    height: 100px;
+    width: auto;
+}
+
+.hidden {
+    position: absolute;
+    to1p: -200px;
+    opacity: 0;
+    z-index: -1;
+    height: 0;
+    width: 0;
+}
+
+input[type="radio"].radio-select + label {
+    opacity: 0.5;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input[type="radio"].radio-select:checked + label {
+    opacity: 1;
+}
+
+input[type="radio"].radio-select:checked + label img,
+input[type="radio"].radio-select:checked + label span {
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.7);
+}
