@@ -168,10 +168,11 @@ class ProductController extends Controller {
             $products = Product::whereIn('category_id', $cat_ids)->get()->toArray();
         } else {
             $cat = Translation::where('value', (strtolower($slug) ))
-            ->where('model', 'Category')
-            ->where('field', 'slug')
-            ->first()
-            ->toArray();
+				->where('model', 'Category')
+				->where('field', 'slug')
+				->first()
+				->toArray();
+			
             if (empty($cat) || $cat['status'] != 1) { return; }
             $cat = array_values(Translation::getTranslation($language['id'], 'Category',
             [Category::find($cat['foreign_key'])->toArray()]))[0];
@@ -199,17 +200,17 @@ class ProductController extends Controller {
         $language = \App\Language::getLocale();
         try {
             $prod_trans = Translation::where('value', (strtolower($slug) ))
-            ->where('field', 'slug')
-            ->where('model', 'Product')
-            ->first();
+				->where('field', 'slug')
+				->where('model', 'Product')
+				->first();
             if (empty($prod_trans['foreign_key'])) {
                 return "Not found!";
             }
             $prod = Translation::getTranslation($language['id'], 'Product', [
                 Product::where('id', $prod_trans['foreign_key'])
-                ->where('status', 1)
-                ->first()
-                ->toArray()
+					->where('status', 1)
+					->first()
+					->toArray()
             ]
         );
         $prod = $prod[array_keys($prod)[0]];
@@ -220,26 +221,26 @@ class ProductController extends Controller {
     $colors = ProductColor::where('product_id', $prod['id'])->where('status', 1)->get()->toArray();
     $sizes = ProductSize::where('product_id', $prod['id'])->where('status', 1)->get()->toArray();
     $prod['colors'] =  !empty($colors)
-    ? array_values(Translation::getTranslation(
-        $language['id'],
-        'Color',
-        Color::whereIn('id', array_column($colors, 'color_id'))
-        ->where('status', 1)
-        ->get()
-        ->toArray()
-        ))
-        : [];
+		? array_values(Translation::getTranslation(
+			$language['id'],
+			'Color',
+			Color::whereIn('id', array_column($colors, 'color_id'))
+				->where('status', 1)
+				->get()
+				->toArray()
+		))
+		: [];
 
     $prod['sizes'] =  !empty($sizes)
         ? array_values(Size::whereIn('id', array_column($sizes, 'size_id'))
-        ->where('status', 1)
-        ->get()
-        ->toArray())
+			->where('status', 1)
+			->get()
+			->toArray())
         : [];
-        $cat = Category::where('id', $prod['category_id'])
+    $cat = Category::where('id', $prod['category_id'])
         ->where('status', 1)
         ->first();
-        $prod['category'] = Translation::getTranslation($language['id'], 'Category',
+    $prod['category'] = Translation::getTranslation($language['id'], 'Category',
         !empty($cat) ? [$cat->toArray()] : []
     );
     $prod['images'] = Image::where('product_id', $prod['id'])->get()->toArray();
