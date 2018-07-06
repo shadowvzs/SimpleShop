@@ -9,8 +9,8 @@ return [
     'port' => env('MAIL_PORT', 587),	
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'order.moodon@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Moodon'),
+        'address' => env('MAIL_FROM_ADDRESS', 'shop@mail.com'),
+        'name' => env('MAIL_FROM_NAME', '***SHOP NAME***'),
     ],
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
