@@ -29,19 +29,19 @@
 </table>
 
 <table style="min-width: 300px;">
-  <tr>
-      <td> {{ trans('default.client_name') }}: </td> <td> {{ $client['name'] }} </td>
-  </tr>
-  <tr>
-      <td> {{ trans('default.client_phone') }}: </td> <td> {{ $client['phone'] }} </td>
-  </tr>
-  <tr>
-      <td> {{ trans('default.client_email') }}: </td> <td> {{ $client['email'] }} </td>
-  </tr>
-  <tr>
-      <td> {{ trans('default.client_address') }}: </td> <td> {{ $client['address'] }} </td>
-  </tr>
-  <tr>
-      <td> {{ trans('default.client_note') }}: </td> <td> {{ $client['note'] }} </td>
-  </tr>
+    <tr>
+        <td> {{ trans('default.client_name') }}: </td> <td> {{ $client['name'] }} </td>
+    </tr>
+    <tr>
+        <td> {{ trans('default.client_phone') }}: </td> <td> {{ $client['phone'] }} </td>
+    </tr>
+    <tr>
+        <td> {{ trans('default.client_email') }}: </td> <td> {{ $client['email'] }} </td>
+    </tr>
+    <tr>
+        <td> {{ trans('default.client_address') }}: </td> <td> {{ $client['address'] }} </td>
+    </tr>
+    <tr>
+        <td> {{ trans('default.client_note') }}: </td> <td> {{ $client['note'] }} </td>
+    </tr>
 </table>

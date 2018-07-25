@@ -18,47 +18,52 @@ class PageController extends Controller {
 
         $language = \App\Language::getLocale();
         $slides = false;
+        $recommend = false;
         $page = Translation::where('field', 'url')
                     ->where('value', '/'.strtolower($slug))
                     ->where('model', 'Page')
                     ->first();
-        if (empty($page)) { return; }
+        if (empty($page)) { abort(404); }
         $page = Page::find($page->foreign_key);
         $cms = \App\Cms::first()->toArray();
-        $decor_option = json_decode($cms['decor_option']);
         $products = array_values(Translation::getTranslation($language['id'], 'Product', \App\Product::take(10)->orderBy('id', 'DESC')->get()->toArray()));
         $page = array_values(Translation::getTranslation($language['id'], 'Page', [$page]))[0];
+        $page_id = $page['id'];
         $ASSET_PATH = asset('img');
         $CMS_PATH = $ASSET_PATH.'/cms/';
         $PROD_PATH = $ASSET_PATH.'/products/';
-    		if (!empty($page['content'])) {
+
+ 		if (!empty($page['content'])) {
             preg_match('/#slide#/', $page['content'], $matches, PREG_OFFSET_CAPTURE);
             if (count($matches) > 0) {
                 $slides = \App\Slide::orderby('order_id', 'asc')->get()->toArray();
             }
+            preg_match('/#recommend#/', $page['content'], $matches, PREG_OFFSET_CAPTURE);
+            if (count($matches) > 0) {
+                $recommend = \App\Slide::orderby('order_id', 'asc')->get()->toArray();
+            }
             $search  = array(
-                '#slide#',
+                '#slide#', '#recommend#',
             );
             $replace = array(
                 ''
-             );
-      			$page['content'] = str_replace($search, $replace, nl2br($page['content']));
-      			for ($i=10;$i>=0;$i--) {
-      				  if (empty($products[$i])) { continue; }
-      				  $page['content'] = str_replace('#product*'.$i.'#', '<div class="col"><a href="/prod/'.$products[$i]['slug'].'" title="'.$products[$i]['name'].'" class="prod_thumbnail"><img src="'.$PROD_PATH.$products[$i]['main_image'].'" alt="Cover"></a></div>', $page['content']);
-      			}
-    		} else {
-    			 $page['content'] = "";
-    		}
+            );
+  			$page['content'] = str_replace($search, $replace, nl2br($page['content']));
+  			for ($i=10;$i>=0;$i--) {
+  				if (empty($products[$i]) || empty($products[$i]['slug'])) { continue; }
+  				$page['content'] = str_replace('#product*'.$i.'#', '<div class="col"><a href="/prod/'.$products[$i]['slug'].'" title="'.$products[$i]['name'].'" class="prod_thumbnail"><img src="'.$PROD_PATH.$products[$i]['main_image'].'" alt="Cover"></a></div>', $page['content']);
+  			}
+		} else {
+			 $page['content'] = "";
+		}
         return view('page.view',[
             'page' => $page,
             'cms' => $cms,
-            'decor_option' => $decor_option,
             'products' => $products,
-            'slides' => $slides
+            'slides' => $slides,
+            'page_id' => $page_id
         ]);
     }
-
 
     public function index() {
         $language = \App\Language::getLocale();
@@ -79,21 +84,17 @@ class PageController extends Controller {
         return view('page.edit', ['page' => $page, 'frontend_pages' => $this->frontend_pages]);
     }
 
-
     public function delete($id=null) {
         Page::destroy($id);
-		Translation::where('foreign_key', $id)->where('model', 'Page')->delete();
+        Translation::where('model', 'Page')->where('foreign_key', $id)->delete();
         return redirect('/page');
     }
 
-
     public function save(Request $request) {
-
         $page = $request->id > 0 ? Page::find($request->id) : new Page;
         $page->status = empty($request->status) ? 0 : 1;
         $page->type = $request->type;
         $page->parent_id = $request->parent_id;
-        $page->place = $request->place;
         $page->category_id = $request->category;
         $lang = $request->language;
 

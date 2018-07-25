@@ -6,7 +6,11 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSizesTable extends Migration
 {
-
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('sizes', function (Blueprint $table) {
@@ -16,9 +20,29 @@ class CreateSizesTable extends Migration
 			$table->timestamps();
 			$table->engine = 'InnoDB';			
         });
-
+    
+		$today = date("Y-m-d H:i:s");
+		$data = ['XXS','XS', 'S', 'M', 'L', 'XL', 'XXL'];
+		$id = 0;
+		foreach ($data as $size) {
+			$id++;
+			\DB::table('sizes')->insert(
+				[
+					'id' => $id,
+					'name' => $size,
+					'status' => 1,
+					'created_at' => $today,
+					'updated_at' => $today,
+				]
+			);
+		}
+	
 	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('sizes');

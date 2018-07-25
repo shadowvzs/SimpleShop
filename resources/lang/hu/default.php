@@ -1,4 +1,4 @@
-<?php  
+<?php
 	return [
 		'close' => 'Bezar',
 		'delete' => 'Torol',
@@ -63,7 +63,23 @@
 		'contact_email' => 'Email Cime',
 		'contact_phone' => 'Telefon Szam',
 		'contact_comment' => 'Hozzaszolas',
-		'contact_send' => 'Kuldes',		
+		'contact_send' => 'Kuldes',
 		'add_to' => 'Rakd be',
 		'mail_sent' => 'Uzenet elkuldve',
+		'select_category' => 'Valasz Kategoriat',
+		'recommanded_product' => 'Ajalt Termekek',
+		'search_filter' => 'Szures',
+		'any' => 'Barmely',
+		'category' => 'Kategoria',
+		'prod_min_price' => 'Min Ar',
+		'prod_max_price' => 'Max Ar',
+		'search' => 'Keres',
+		'order_date' => 'Datum',
+		'order_name' => 'Nev',
+		'order_price' => 'Ar',
+		'order_asc' => 'ASC',
+		'order_desc' => 'DESC',
+		'no_product' => 'Nincs termek',
+		'no_description' => 'Ennek a termeknek meg nincs leirasa',
+		//Alege categoria
 ];

@@ -7,11 +7,11 @@
 ?>
 
 <div class="card mx-auto" style="max-width: 500px;">
-	  <div class="card-header">
-	    	<h3>Orders #{{$order['id']}}</h3>
-	  </div>
-	  <div class="card-body">
-				<table class="table order_table text-center mx" width="100%">
+    <div class="card-header">
+        <h3>Orders #{{$order['id']}}</h3>
+    </div>
+    <div class="card-body">
+        <table class="table order_table text-center mx" width="100%">
             @foreach($order_products as $product)
                 <?php
                     $product = $product['product_data'];
@@ -42,22 +42,22 @@
         </table>
 
         <table style="min-width: 300px;" width="100%" >
-          <tr>
-              <td> {{ trans('default.client_name') }}: </td> <td> {{ $client->name }} </td>
-          </tr>
-          <tr>
-              <td> {{ trans('default.client_phone') }}: </td> <td> {{ $client->phone }} </td>
-          </tr>
-          <tr>
-              <td> {{ trans('default.client_email') }}: </td> <td> {{ $client->email }} </td>
-          </tr>
-          <tr>
-              <td> {{ trans('default.client_address') }}: </td> <td> {{ $client->address }} </td>
-          </tr>
-          <tr>
-              <td> {{ trans('default.client_note') }}: </td> <td> {{ $client->note }} </td>
-          </tr>
-       </table>
+            <tr>
+                <td> {{ trans('default.client_name') }}: </td> <td> {{ $client->name }} </td>
+            </tr>
+            <tr>
+                <td> {{ trans('default.client_phone') }}: </td> <td> {{ $client->phone }} </td>
+            </tr>
+            <tr>
+                <td> {{ trans('default.client_email') }}: </td> <td> {{ $client->email }} </td>
+            </tr>
+            <tr>
+                <td> {{ trans('default.client_address') }}: </td> <td> {{ $client->address }} </td>
+            </tr>
+            <tr>
+                <td> {{ trans('default.client_note') }}: </td> <td> {{ $client->note }} </td>
+            </tr>
+        </table>
     </div>
 </div>
 @endsection

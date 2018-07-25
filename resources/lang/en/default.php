@@ -1,4 +1,4 @@
-<?php  
+<?php
 	return [
 		'close' => 'Close',
 		'delete' => 'Delete',
@@ -66,4 +66,20 @@
 		'contact_send' => 'Send',
 		'add_to' => 'Add to',
 		'mail_sent' => 'Message was sent',
+		'select_category' => 'Select Category',
+		'recommanded_product' => 'Recommanded Products',
+		'search_filter' => 'Filter',
+		'any' => 'Any',
+		'category' => 'Category',
+		'prod_min_price' => 'Min Price',
+		'prod_max_price' => 'Max Price',
+		'search' => 'Search',
+		'order_date' => 'Date',
+		'order_name' => 'Name',
+		'order_price' => 'Price',
+		'order_asc' => 'ASC',
+		'order_desc' => 'DESC',
+		'no_product' => 'No product',
+		'no_description' => 'This product still not have description',
+		//Alege categoria
 ];

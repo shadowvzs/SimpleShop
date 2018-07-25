@@ -6,7 +6,11 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateOrderProductsTable extends Migration
 {
-
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('orderproducts', function (Blueprint $table) {
@@ -23,6 +27,11 @@ class CreateOrderProductsTable extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('orderproducts');

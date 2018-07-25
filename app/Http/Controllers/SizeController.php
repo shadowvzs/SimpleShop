@@ -12,38 +12,34 @@ class SizeController extends Controller {
         $this->middleware('auth');
     }
 
-
     public function index() {
-      $sizes = Size::all()->toArray();
-      return view('size.index',['sizes' => $sizes]);
+        $sizes = Size::all()->toArray();
+        return view('size.index',['sizes' => $sizes]);
     }
 
     public function add() {
-      return view('size.add');
+        return view('size.add');
     }
 
     public function edit($id) {
-      return view('size.edit', ['size' => Size::find($id)]);
+        return view('size.edit', ['size' => Size::find($id)]);
     }
 
 
     public function delete($id=null) {
-      Size::destroy($id);
-      return redirect('/size');
+        Size::destroy($id);
+        return redirect('/size');
     }
 
-
     public function save(Request $request) {
-
-      $size = $request->id > 0 ? Size::find($request->id) : new Size;
-      $size->status = empty($request->status) ? 0 : 1;
-      $size->name = $request->name;
-      $lang = $request->language;
-
-      if (!$size->save()) {
-        App::abort(500, 'Error');
-      }
-      return redirect('/size');
+        $size = $request->id > 0 ? Size::find($request->id) : new Size;
+        $size->status = empty($request->status) ? 0 : 1;
+        $size->name = $request->name;
+        $lang = $request->language;
+        if (!$size->save()) {
+            App::abort(500, 'Error');
+        }
+        return redirect('/size');
     }
 
 }

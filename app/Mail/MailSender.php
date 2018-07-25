@@ -20,13 +20,14 @@ class MailSender extends Mailable {
         $this->client = $client;
     }
 
-
     public function build() {
-      return $this->view('email.order')
-                     ->with([
-                         'products' => $this->products,
-                         'cms' => $this->cms,
-                         'client' => $this->client,
-                     ]);
+        $valami = 1;
+        $masik = 2;
+        return $this->view('email.order')
+            ->with([
+                'products' => $this->products,
+                'cms' => $this->cms,
+                'client' => $this->client,
+        ]);
     }
 }

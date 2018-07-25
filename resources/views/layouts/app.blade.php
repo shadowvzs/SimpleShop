@@ -18,53 +18,29 @@
         <meta property="og:title"         content="{{ $page['meta_title'] ?? '' }}" />
         <meta property="og:description"   content="{{ $page['meta_description'] ?? '' }}" />
         <meta property="og:image"         content="{{ asset('img/cms/'.$cms['logo']) }}" />
-		<meta name="twitter:title" content="{{ $page['meta_title'] ?? '' }}">
-		<meta name="twitter:description" content="{{ $page['meta_description'] ?? '' }}">
-		<meta name="twitter:image" content="{{ asset('img/cms/'.$cms['logo']) }}">
-		<meta name="twitter:card" content="summary_large_image">
         <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="{{ asset('js/elevatezoom.js') }}"></script>
         <script src="{{ asset('js/notify.js') }}"></script>
     </head>
     <body>
         <div id="app">
-            @if ($cms['place']->top)
-                <div class='top-left-deco deco'>
-                    <img src="{{ asset('img/cms/'.$cms['decoration'])}}" alt="top-left deco">
-                </div>
-            @endif
-            @if ($cms['place']->right)
-                <div class='top-right-deco deco'>
-                    <img src="{{ asset('img/cms/'.$cms['decoration'])}}" alt="top-right deco">
-                </div>
-            @endif
-
             <header>
                 @include('include.header')
             </header>
 
-          	<div class="container-fluid body" style="position: relative;">
+          	<div class="body" style="position: relative;">
           		@include('include.status')
                 @if (!empty($slides))
                     @include('include.slide', ['slides' => $slides])
                 @endif
             	@yield('content')
+
           	</div>
         </div>
         <footer>
             @include('include.footer')
         </footer>
-        
-        @if ($cms['place']->bottom)
-            <div class='bottom-right-deco deco'>
-                <img src="{{ asset('img/cms/'.$cms['decoration'])}}" alt="bottom-right deco">
-            </div>
-        @endif
-        @if ($cms['place']->left)
-            <div class='bottom-left-deco deco'>
-                <img src="{{ asset('img/cms/'.$cms['decoration'])}}" alt="bottom-left deco">
-            </div>
-        @endif
+
         <div class="modal fade favorite-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -91,11 +67,11 @@
                 </div>
             </div>
         </div>
-		
+
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/custom.js?t='.time()) }}"></script>
 	    <script src="{{ asset('js/notify.js') }}"></script>
-	
+
         <script>
               (function(d, s, id) {
               var js, fjs = d.getElementsByTagName(s)[0];

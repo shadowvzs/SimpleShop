@@ -41,13 +41,13 @@
 							<td><input type="checkbox" name="orders[]" class="order_checkbox" value={{ $order['id'] }}></td>
 						</tr>
 					@endforeach
+					<center>
+						<input type="submit" class="btn btn-primary max-auto" value="Delete">
+					</center>
 				@else
 					<tr><td colspan="4"><br>... empty ...</td></tr>
 				@endif
 			</table>
-			<center>
-				<input type="submit" class="btn btn-primary max-auto" value="Delete">
-			</center>
 		</form>
 	</div>
 </div>

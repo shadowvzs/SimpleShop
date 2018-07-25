@@ -9,15 +9,12 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-
         <div id="app">
           	<div class="container-fluid body">
           			@include('include.status')
           			@yield('content')
           	</div>
         </div>
-
         <script src="{{ asset('js/app.js') }}"></script>
-
     </body>
 </html>

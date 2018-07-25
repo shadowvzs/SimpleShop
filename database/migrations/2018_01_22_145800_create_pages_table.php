@@ -6,7 +6,11 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePagesTable extends Migration
 {
-
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('pages', function (Blueprint $table) {
@@ -26,6 +30,25 @@ class CreatePagesTable extends Migration
 		$default_lang = 1;
 		
 		$data = [
+			['HOME', 1, 0, 0, '#cover#<br><div class="d-flex justify-content-around flex-row flex-wrap">#product*1# #product*1# #product*1# #product*1#</div>', 0, '/home','PAGINA PRINCIPALA','FOOLDAL',0],
+			['NEW IN', 2, 0, 0, '', 1, "/collection/hot",'NOUTATI','UJDONSAGOK',0], 
+			['COLLECTION', 3, 0, 0, '', 1, '/collection/all','COLECTIE', 'KATEGORIAK',0], 
+			['EVENING', 4, 3, 0, '', 1, '/collection/evening','DE SEARE', 'ESTELYI',1], 
+			['DATE NIGHT', 5, 3, 0, '', 1, '/collection/date_night', 'INTALNIRE', 'RANDI',2], 
+			['(BRIDAL)', 6, 3, 0, '', 1, '/collection/bridal','DE NUNTA','ESKUVOI',3], 
+			['ABOUT', 7, 0, 0, "<div class='about_box leather-bg'><h3>Brand manifesto Mood'On</h3>
+
+         Welcome everyone! We're Mood'On and we've decided to redefine the way evening gowns are looked upon, transforming them from simple and must-have accessories for special events, cocktail parties and galas, into genuine states of mind aimed to suggest and emanate elegance and refinement. Working with passion and skill, exclusively with high-quality textures, created from natural silk fibers, we made sure that we manage to offer, those who decide to wear our creations, a unique and unforgettable experience, after all, a night gown should be a declaration of love to ourselves, don't you think, without forgetting about comfort, as attitude, the ingenious and honest hart-to-pretend smile, the sparkle, all emanate from us.
+Evermore.
+
+         Bohemian spirits, however, extremely down to earth when it comes to the reality of modern day fashion, we sculpted evening gowns  able to bring out the best of all silhouettes, concentrating on elegant creations with eminently feminine lines, to celebrate, as it should, the fair sex. All  Mood'On designs from our site equal uniqueness and exclusivity, the gowns of our brand are, entirely, the fruit of our hard work, and also a fabulous mix of classical and modern, in order to be able to offer that unique experience, so desired nowadays, in a world where originality slowly and surely seems to lose ground.
+
+           We didn't disregard the importance of establishing a special relationship with you either, we consider, that every member of our community is a member of the big Mood'On family, that's the reason we took the commitment to surprise you every time, not only through the diversity of our actual collection (an the rest of the ones that will come), but also through small signs of gratitude, in forms of gifts, personalized surprises, as we like to call them which you'll receive in every package, after placing and order. We took into consideration the need of customers for quality guarantee, as a result, we offer returns, regardless of the motive, in a term of 7 days from the delivery of the package, without requesting additional information, offering for analysis and consultation the table of measurements and size based on which we operate.
+
+             Finally, we don't have anything else left to do, than to honestly thank you for the interest shown to our products and we invite you into the little corner of our universe, of Heaven, where you will always be more than just clients and where elegance is a state of mind. Ours. Yours, Everyone's.
+<br><br></div>", 0, '/about','DESPR NOI','ROLUNK',0], 
+			['PRESS', 8, 0, 0, '', 0, '/press','PRES','NEM TUDOM',0], 
+			
 			['DASHBOARD', 9, 0, 1, '', 2, '/dashboard', 'DASHBOARD', 'DASHBOARD',0], 
 			['PRODUCT', 10, 0, 1, '', 2, '/product', 'PRODUSE', 'ARU',0], 
 			['ADD', 11, 10, 1, '', 2, '/product/add', 'ADAUGARE', 'HOZZAADAS',0], 
@@ -65,6 +88,7 @@ class CreatePagesTable extends Migration
 					'category_id' => $page_data[9],
 					'type' => $page_data[5],
 					'order' => $page_data[1],
+					//'url' => $page_data[6],
 					'auth' => $page_data[3],
 					'created_at' => $today,
 					'updated_at' => $today,

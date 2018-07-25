@@ -30,71 +30,71 @@ class ContactController extends Controller {
         return view('contact.edit', ['contact' => $contact]);
     }
 
-
     public function delete($id=null) {
-      $contact = Contact::find($id);
-	  if (empty($contact)) { return redirect('/contact'); }
-	  $contact = $contact->toArray();
-	  Translation::where('foreign_key', $id)->where('model', 'Contact')->delete();
-      $path = "./img/icons/".$contact['icon'];
-      if (file_exists($path) && !empty($contact['icon'])) {
-        unlink($path);
-      }
-      Contact::destroy($id);
-      return redirect('/contact');
+        $contact = Contact::find($id);
+        if (empty($contact)) {
+            return redirect('/contact');
+        }
+        Translation::where('model', 'Contact')->where('foreign_key', $id)->delete();
+        $path = "./img/icons/".$contact['icon'];
+        if (file_exists($path) && !empty($contact['icon'])) {
+          unlink($path);
+        }
+        Contact::destroy($id);
+        return redirect('/contact');
     }
 
 
     public function save(Request $request) {
 
-      $contact = $request->id > 0 ? Contact::find($request->id) : new Contact;
-      $contact->status = empty($request->status) ? 0 : 1;
-      $contact->type = $request->type;
-      $lang = $request->language;
+        $contact = $request->id > 0 ? Contact::find($request->id) : new Contact;
+        $contact->status = empty($request->status) ? 0 : 1;
+        $contact->type = $request->type;
+        $lang = $request->language;
 
-      if ($request->id > 0) {
-          //if this was edit then i delete the old translation and product data except images
-          $id = $request->id;
-          Translation::where('language_id', $lang)
-                     ->where('model', 'Contact')
-                     ->where('foreign_key', $id)->delete();
+        if ($request->id > 0) {
+            //if this was edit then i delete the old translation and product data except images
+            $id = $request->id;
+            Translation::where('language_id', $lang)
+                        ->where('model', 'Contact')
+                        ->where('foreign_key', $id)->delete();
 
-          $path = "./img/icons/".$contact['icon'];
-          if (file_exists($path) && (!empty($_FILES['image']['tmp_name']))) {
-              unlink($path);
-          }
+            $path = "./img/icons/".$contact['icon'];
+            if (file_exists($path) && (!empty($_FILES['image']['tmp_name']))) {
+                unlink($path);
+            }
       }
 
       if ($contact->save()) {
-          $id = $contact['id'];
-          $trans_fields = Translation::$virtual_fields['Contact'];
-          foreach ($trans_fields as $trans_field) {
-              Translation::create([
-                  'model' => 'Contact',
-                  'foreign_key' => $id,
-                  'field' => $trans_field,
-                  'language_id' => $lang,
-                  'value' => $request->$trans_field,
-              ]);
-          }
-          if (!empty($_FILES['image']['tmp_name'])) {
-              $filename = time().$_FILES['image']['name'];
-              move_uploaded_file($_FILES['image']['tmp_name'], "img/icons/".$filename);
-              $contact->icon = $filename;
-              $contact->save();
-          }
-      } else {
-          App::abort(500, 'Error');
-      }
-      return redirect('/contact');
+            $id = $contact['id'];
+            $trans_fields = Translation::$virtual_fields['Contact'];
+            foreach ($trans_fields as $trans_field) {
+                Translation::create([
+                    'model' => 'Contact',
+                    'foreign_key' => $id,
+                    'field' => $trans_field,
+                    'language_id' => $lang,
+                    'value' => $request->$trans_field,
+                ]);
+            }
+            if (!empty($_FILES['image']['tmp_name'])) {
+                $filename = time().$_FILES['image']['name'];
+                move_uploaded_file($_FILES['image']['tmp_name'], "img/icons/".$filename);
+                $contact->icon = $filename;
+                $contact->save();
+            }
+        } else {
+            App::abort(500, 'Error');
+        }
+        return redirect('/contact');
     }
-	
+
     public function view() {
         return view('contact.view');
     }
-	
+
 	public function newContactMessage(\App\Http\Requests\ContactRequest $request) {
-		
+
 		$language = \App\Language::getLocale();
         $cms = \App\Cms::first()->toArray();
 
@@ -109,9 +109,9 @@ class ContactController extends Controller {
             ->send(new ContactSender($cms, $client));
 
         $response['success'] = true;
-  
+
 		session(['status' => __('default.mail_sent')]);
-	
+
 		return back();
 	}
 }

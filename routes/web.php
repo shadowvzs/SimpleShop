@@ -1,8 +1,4 @@
 <?php
-/*
-    FRONTEND Part
-*/
-
 
 Auth::routes();
 
@@ -78,9 +74,18 @@ Route::get('/cart/delete/{id}', 'CartController@delete');
 Route::post('/cart/order', 'CartController@order');
 
 Route::get('/prod/{slug}', 'ProductController@view');
+Route::get('/searchProduct', 'ProductController@searchProduct');
 Route::get('/collection/{slug}', 'ProductController@collection');
 Route::get('/collection', 'ProductController@collection');
+
+Route::get('search/{query}', 'ProductController@searchProduct')->where('query','.+');
 
 Route::get('/', 'PageController@getPage');
 
 Route::get('{slug?}', 'PageController@getPage');
+
+/*
+Route::get('{slug}', [
+    'uses' => 'PageController@getPage'
+])->where('slug', '([A-Za-z0-9\-\/]+)');
+*/

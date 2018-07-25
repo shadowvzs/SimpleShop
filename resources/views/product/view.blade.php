@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="row product-view">
 	<div class='col-12 col-sm-5 mt-4'>
 		<div class='bigImage col-12'>
@@ -19,10 +20,16 @@
 		<div class='m-4'>
 			<h1 class="prod_title">{{$prod['name'] ?? ""}}</h1>
 			<div class="prod_code">{{ Lang::get('default.prod_code') }}: {{ str_pad($prod['id'], 4, "0", STR_PAD_LEFT) }}</div>
-			<div class="prod_price">{{ Lang::get('default.prod_price') }}: {{ round($prod['total_price']) }} {{$cms['currency']}}</div>
+			<div class="prod_price">{{ Lang::get('default.prod_price') }}: {{ $prod['total_price'] }} {{$cms['currency']}}</div>
 			<div class="prod_description">
-				<h2>{{ Lang::get('default.prod_description') }}</h2>
-				<p> {!! $prod['description'] ?? "" !!} </p>
+				<h2>{{ Lang::get('default.prod_description')  }}</h2>
+				<p>
+					@if (empty($prod['description']))
+						{{ __('default.no_description') }}
+					@else
+					 	{!! $prod['description'] !!}
+					@endif
+				</p>
 			</div>
 			<div class="prod_color">
 				<p>{{ Lang::get('default.prod_color') }}</p>
@@ -73,69 +80,65 @@
 <br><br>
 
 <script>
-	$( document ).ready(function() {
-		//localStorage.removeItem('favorites');
-			 var bigImage = '#zoom_01';
-			 var zoomConfig = {
-					zoomType: "lens",
-					lensShape: "round",
-					lensSize: 200				 
-					//zoomType: "inner",
-					//cursor: "crosshair",
-					//zoomWindowFadeIn: 500,
-					//zoomWindowFadeOut: 750
-			 };
-			 var input_id = $('#prod_id');
+$( document ).ready(function() {
+	//localStorage.removeItem('favorites');
+	var bigImage = '#zoom_01';
+	var zoomConfig = {
+		zoomType : "lens",
+		lensShape : "round",
+	  	lensSize : 200
+	};
+	var input_id = $('#prod_id');
 
-			 if ($( document ).width() > 600) {
-				 	elevateZoomInit();
-			 }
+	if ($( document ).width() > 600) {
+		elevateZoomInit();
+	}
 
-				$('.mini_image').click(function(){
-						var url = $(this).data('url');
-						var spt = $(document).scrollTop();
-						$('.zoomContainer').remove();
-						$(document).scrollTop()
-						$(bigImage).prop('src', url);
-						$(document).scrollTop(spt);
-						$(bigImage).data('zoom-image', url);
-						elevateZoomInit();
-				});
-
-				function elevateZoomInit(){
-						var $j = jQuery.noConflict();					//	var $j = $.noConflict();
-						$('#zoom_01').elevateZoom(zoomConfig);
-				}
-
-				$('.prod_amount .prod_amount_change').click(function() {
-						var dir = $(this).text();
-						var inp = $('#prod_amount');
-						var amount = inp.val();
-						if ((amount < 100) && (dir == "+")) {
-								amount++;
-						} else if ((amount > 1) && (dir == "-")) {
-								amount--;
-						}
-						inp.val(amount);
-				});
-				
-				$('input[type=radio]').change(function (){
-					var color = $('input[name=color]:checked').val();
-					var size = $('input[name=size]:checked').val();
-					var status = color && size;
-					if (!status) {
-						var button = $('#add_cart_btn');
-						if (!size) {
-							msg = "{{ trans('default.prod_size') }}";
-						} else {
-							msg = "{{ trans('default.prod_color') }}";
-						}
-						button.prop('title', msg);
- 					}	
-					$('#add_cart_btn').prop('disabled', !status);
-				});
+	$('.mini_image').click(function(){
+		var url = $(this).data('url');
+		var spt = $(document).scrollTop();
+		$('.zoomContainer').remove();
+		$(document).scrollTop()
+		$(bigImage).prop('src', url);
+		$(document).scrollTop(spt);
+		$(bigImage).data('zoom-image', url);
+		elevateZoomInit();
 	});
-     
+
+	function elevateZoomInit(){
+		var $j = jQuery.noConflict();					//	var $j = $.noConflict();
+		$('#zoom_01').elevateZoom(zoomConfig);
+	}
+
+	$('.prod_amount .prod_amount_change').click(function() {
+		var dir = $(this).text();
+		var inp = $('#prod_amount');
+		var amount = inp.val();
+		if ((amount < 100) && (dir == "+")) {
+			amount++;
+		} else if ((amount > 1) && (dir == "-")) {
+			amount--;
+		}
+		inp.val(amount);
+	});
+
+	$('input[type=radio]').change(function (){
+		var color = $('input[name=color]:checked').val();
+		var size = $('input[name=size]:checked').val();
+		var status = color && size;
+		if (!status) {
+			var button = $('#add_cart_btn');
+			if (!size) {
+				msg = "{{ trans('default.prod_size') }}";
+			} else {
+				msg = "{{ trans('default.prod_color') }}";
+			}
+			button.prop('title', msg);
+		}
+		$('#add_cart_btn').prop('disabled', !status);
+	});
+});
+
 </script>
 
 @endsection
