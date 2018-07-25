@@ -15,6 +15,7 @@ class PageController extends Controller {
     }
 
     public function getPage($slug="home") {
+
         $language = \App\Language::getLocale();
         $slides = false;
         $page = Translation::where('field', 'url')
@@ -44,7 +45,7 @@ class PageController extends Controller {
       			$page['content'] = str_replace($search, $replace, nl2br($page['content']));
       			for ($i=10;$i>=0;$i--) {
       				  if (empty($products[$i])) { continue; }
-      				  $page['content'] = str_replace('#product*'.$i.'#', '<a href="/prod/'.$products[$i]['slug'].'" title="'.$products[$i]['name'].'" class="prod_thumbnail"><img src="'.$PROD_PATH.$products[$i]['main_image'].'" alt="Cover"></a>', $page['content']);
+      				  $page['content'] = str_replace('#product*'.$i.'#', '<div class="col"><a href="/prod/'.$products[$i]['slug'].'" title="'.$products[$i]['name'].'" class="prod_thumbnail"><img src="'.$PROD_PATH.$products[$i]['main_image'].'" alt="Cover"></a></div>', $page['content']);
       			}
     		} else {
     			 $page['content'] = "";
@@ -57,6 +58,7 @@ class PageController extends Controller {
             'slides' => $slides
         ]);
     }
+
 
     public function index() {
         $language = \App\Language::getLocale();
@@ -77,16 +79,21 @@ class PageController extends Controller {
         return view('page.edit', ['page' => $page, 'frontend_pages' => $this->frontend_pages]);
     }
 
+
     public function delete($id=null) {
         Page::destroy($id);
+		Translation::where('foreign_key', $id)->where('model', 'Page')->delete();
         return redirect('/page');
     }
 
+
     public function save(Request $request) {
+
         $page = $request->id > 0 ? Page::find($request->id) : new Page;
         $page->status = empty($request->status) ? 0 : 1;
         $page->type = $request->type;
         $page->parent_id = $request->parent_id;
+        $page->place = $request->place;
         $page->category_id = $request->category;
         $lang = $request->language;
 

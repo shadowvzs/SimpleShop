@@ -19,6 +19,7 @@ class CartController extends Controller {
     }
 
     public function index() {
+
         $cart_products = Session::get('cart');
         $language = \App\Language::getLocale();
 
@@ -31,6 +32,7 @@ class CartController extends Controller {
             'success' => true,
             'items' => $products,
         ];
+
         echo(json_encode($response));
     }
 
@@ -55,15 +57,17 @@ class CartController extends Controller {
         }
 
         echo(json_encode([
-            'success' => $status,
-            'message' => $message ?? "",
-            'product' => $prod
+          'success' => $status,
+          'message' => $message ?? "",
+          'product' => $prod
         ]));
     }
 
     public function order(\App\Http\Requests\OrderRequest $request) {
-        $language = \App\Language::getLocale();
+
+		$language = \App\Language::getLocale();
         $cart_products = Session::get('cart');
+
         $cms = \App\Cms::first()->toArray();
         $answer = explode('_', $request->timestamp);
         $user_answer = intval($answer[1] ?? 0) === intval($request->answer);
@@ -83,6 +87,7 @@ class CartController extends Controller {
             'address' => $request->address,
             'note' => $request->note,
         ];
+
         $order = new \App\Order;
         $order->client_data = json_encode($client);
         $order->total_price = 0;
@@ -103,15 +108,15 @@ class CartController extends Controller {
         $order->save();
 
         Mail::to($cms['order_mail'])
-        ->cc($request->email)
-        ->send(new MailSender($cart_products, $cms, $client));
+            ->cc($request->email)
+            ->send(new MailSender($cart_products, $cms, $client));
 
         $response['success'] = true;
         Session::put('cart', []);
-        
-        echo(json_encode($response));
 
-    }
+        echo(json_encode($response));
+    
+	}
 
     public function delete($id=null) {
         $cart_prods = Session::get('cart');
@@ -126,8 +131,8 @@ class CartController extends Controller {
         }
 
         echo(json_encode([
-            'success' => $status,
-            'id' => $id,
+          'success' => $status,
+          'id' => $id,
         ]));
     }
 

@@ -1,10 +1,17 @@
 <?php
+/*
+    FRONTEND Part
+*/
+
 
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/view/{id}', 'DashboardController@order_view');
 Route::get('/dashboard/language/{id}/{code}', 'LanguageController@adminChangeLanguage');
+
+Route::get('/logout', 'UserController@logout');
+Route::post('/users/save', 'UserController@saveUser');
 
 Route::post('/order/delete', 'DashboardController@order_delete');
 
@@ -54,11 +61,13 @@ Route::get('/slide/move/{id}/{direction}', 'SlideController@move');
 Route::get('/slide/delete/{id}', 'SlideController@delete');
 Route::post('/slide/save', 'SlideController@save');
 
+Route::get ('/contacts', 'ContactController@view');
 Route::get ('/contact', 'ContactController@index');
 Route::get ('/contact/add', 'ContactController@add');
 Route::get ('/contact/delete/{id}', 'ContactController@delete');
 Route::get ('/contact/edit/{id}', 'ContactController@edit');
 Route::post('/contact/save', 'ContactController@save');
+Route::post('/contact/new', 'ContactController@newContactMessage');
 
 Route::get ('/setting', 'CmsController@index');
 Route::post('/setting/save', 'CmsController@save');
@@ -70,14 +79,8 @@ Route::post('/cart/order', 'CartController@order');
 
 Route::get('/prod/{slug}', 'ProductController@view');
 Route::get('/collection/{slug}', 'ProductController@collection');
+Route::get('/collection', 'ProductController@collection');
 
-Route::get('/test', 'CartController@order');
 Route::get('/', 'PageController@getPage');
 
 Route::get('{slug?}', 'PageController@getPage');
-
-/*
-Route::get('{slug}', [
-    'uses' => 'PageController@getPage'
-])->where('slug', '([A-Za-z0-9\-\/]+)');
-*/

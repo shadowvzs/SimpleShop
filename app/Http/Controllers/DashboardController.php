@@ -11,10 +11,16 @@ class DashboardController extends Controller {
         $this->middleware('auth');
     }
 
+
     public function index() {
         $orders = \App\Order::orderBy('id', 'desc')->paginate(20);
         return view('admin.index', ['orders' => $orders]);
     }
+	
+    public function logout() {
+        \Auth::logout();
+		return redirect('/home');
+    }	
 
     public function order_view($id) {
         $order = \App\Order::find(intval($id));

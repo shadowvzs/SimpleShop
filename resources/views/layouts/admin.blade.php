@@ -13,26 +13,26 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            @include('include.admin_header')
-        </nav>
+<div id="app">
+  <nav class="navbar navbar-default navbar-static-top">
+		@include('include.admin_header')
+  </nav>
 
-        <div class="container-fluid" style="margin-top: 40px;">
-            <div class="row">
+	<div class="container-fluid" style="margin-top: 40px;">
+		<div class="row">
 
-                <div class="side col-sm-4 col-md-3 col-lg-2 sidebar" style="padding: 0;">
-                    @include('include.admin_sidebar')
-                </div>
+			<div class="side col-md-3 col-lg-2 sidebar" style="padding: 0;">
+				@include('include.admin_sidebar')
+			</div>
 
-                <div class="content col-sm-8 col-md-9 col-lg-10" style="margin-top: 40px;">
-                    @include('include.status')
-                    @yield('content')
-                </div>
+			<div class="content col-md-9 col-lg-10" style="margin-top: 40px;">
+				@include('include.status')
+				@yield('content')
+			</div>
 
-            </div>
-        </div>
-    </div>
-    <script src="{{ asset('js/custom.js?p='.time()) }}"></script>
+		</div>
+	</div>
+</div>
+<script src="{{ asset('js/custom.js?p='.time()) }}"></script>
 </body>
 </html>

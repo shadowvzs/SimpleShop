@@ -7,24 +7,21 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MailSender extends Mailable {
+class ContactSender extends Mailable {
     use Queueable, SerializesModels;
 
-    protected $products;
     protected $cms;
     protected $client;
 
-    public function __construct($products, $cms, $client) {
-        $this->products = $products;
+    public function __construct($cms, $client) {
         $this->cms = $cms;
         $this->client = $client;
     }
 
 
     public function build() {
-      return $this->view('email.order')
+      return $this->view('email.contact')
                      ->with([
-                         'products' => $this->products,
                          'cms' => $this->cms,
                          'client' => $this->client,
                      ]);

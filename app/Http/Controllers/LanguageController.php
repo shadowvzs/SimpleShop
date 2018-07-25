@@ -31,8 +31,10 @@ class LanguageController extends Controller {
     }
 
     public function adminChangeLanguage($id, $code) {
+
         Session::put('lang', $id);
         Session::put('lang_code', $code);
+
         return back();
     }
 
@@ -101,7 +103,9 @@ class LanguageController extends Controller {
       return redirect('/language');
     }
 
+
     public function save(Request $request) {
+
       $lang = $request->id > 0 ? Language::find($request->id) : new Language;
       $lang->status = empty($request->status) ? 0 : 1;
       $lang->name = $request->name;

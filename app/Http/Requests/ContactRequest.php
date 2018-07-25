@@ -4,30 +4,29 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class ContactRequest extends FormRequest
 {
     public function authorize() {
         return true;
     }
-
 
     public function rules() {
 
         return [
             'email' => 'required|email',
             'phone' => 'required|regex:/[0-9+]/',
-            'name' => 'required|min:1|max:255',
-            'answer' => 'required|integer',
+            'name' => 'required|min:3|max:255',
+            'comment' => 'required|min:10',
         ];
     }
 
 
     public function messages() {
         return [
-            'email' => 'wrong email address ...',
-            'phone' => 'wrong phone number ...',
-            'name' => 'wrong name number ...',
-            'answer' => 'wrong answer ...',
-       ];
+            'email' => 'Invalid email address ...',
+            'phone' => 'Invalid phone number ...',
+            'name' => 'Wrong name ...',
+            'comment' => 'Too short comment ...',
+        ];
     }
 }

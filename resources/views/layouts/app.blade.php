@@ -18,6 +18,10 @@
         <meta property="og:title"         content="{{ $page['meta_title'] ?? '' }}" />
         <meta property="og:description"   content="{{ $page['meta_description'] ?? '' }}" />
         <meta property="og:image"         content="{{ asset('img/cms/'.$cms['logo']) }}" />
+		<meta name="twitter:title" content="{{ $page['meta_title'] ?? '' }}">
+		<meta name="twitter:description" content="{{ $page['meta_description'] ?? '' }}">
+		<meta name="twitter:image" content="{{ asset('img/cms/'.$cms['logo']) }}">
+		<meta name="twitter:card" content="summary_large_image">
         <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="{{ asset('js/elevatezoom.js') }}"></script>
         <script src="{{ asset('js/notify.js') }}"></script>
@@ -34,6 +38,7 @@
                     <img src="{{ asset('img/cms/'.$cms['decoration'])}}" alt="top-right deco">
                 </div>
             @endif
+
             <header>
                 @include('include.header')
             </header>
@@ -44,13 +49,12 @@
                     @include('include.slide', ['slides' => $slides])
                 @endif
             	@yield('content')
-
           	</div>
         </div>
         <footer>
             @include('include.footer')
         </footer>
-        <br><br><br><br>
+        
         @if ($cms['place']->bottom)
             <div class='bottom-right-deco deco'>
                 <img src="{{ asset('img/cms/'.$cms['decoration'])}}" alt="bottom-right deco">

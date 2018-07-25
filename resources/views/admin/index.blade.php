@@ -2,7 +2,26 @@
 @section('content')
 
 <div class="card mx-auto" style="max-width: 500px;">
-	<div class="card-body">
+	<div class="card-header settings">
+		<b>User Settings</b>
+	</div>
+	<div class="card-body settings">
+		<form action='/users/save' method="POST">
+			@method('post')
+			@csrf
+            <input type="text" name="email" placeholder="Your mail" value="{{ Auth::user()->email }}" required class="form-control"><br>
+            <input type="password" name="old_pass" placeholder="Old password" value="" required class="form-control"><br>
+            <input type="password" name="new_pass" placeholder="New Password" value="" required class="form-control"><br>
+            <input type="password" name="new_pass2" placeholder="Password again" value="" required class="form-control"><br>
+			<center>
+				<input type="submit" class="btn btn-primary max-auto" value="Save">
+			</center>
+		</form>
+	</div>
+</div>
+<br><br>
+<div class="card mx-auto" style="max-width: 500px;">
+	<div class="card-body orders">
 		<form action='/order/delete' method="POST">
 			@method('post')
 			@csrf
@@ -35,14 +54,14 @@
 
 <script>
 $( document ).ready(function() {
-	var sel = $('input[name=select_all]');
+	var sel = $('.orders input[name=select_all]');
 	if (sel.length) {
-		sel.click(function(){
-			var status = sel.prop('checked');
-			$('.order_checkbox').each(function(e){
-				$(this).prop('checked', status);
+			sel.click(function(){
+					var status = sel.prop('checked');
+					$('.order_checkbox').each(function(e){
+							$(this).prop('checked', status);
+					});
 			});
-		});
 	}
 });
 </script>

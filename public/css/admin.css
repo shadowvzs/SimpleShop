@@ -1,227 +1,33 @@
-body {
-    font-family: "Lato", sans-serif;
-}
-
-.inline-block {
-    display: inline-block;
-}
-
-
-.side-menu {
-    padding-top: 20px;
-    text-align: center;
-}
-
-.contact_table td {
-    height: 42px;
-}
-
-.side .menu {
-    margin: 15px 0;
-    display:inline-block;
-    text-align: center;
-    border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.3);
-    box-shadow: 0 0 15px 15px rgba(0,0,0,0.3);
-}
-
-.side .menu > a {
-    padding: 5px 30px;
-    text-decoration: none;
-    font-size: 20px;
-    color: rgba(0,0,0,0.7);
-    background: linear-gradient(top, #ddd 0%, #c2c2c2 100%);
-    background: -moz-linear-gradient(top, #ddd 0%, #c2c2c2 100%);
-    background: -webkit-linear-gradient(top, #ddd 0%,#c2c2c2 100%);
-    background:-o-linear-gradient(top, #ddd 0%,#c2c2c2 100%);
-    background:-ms-linear-gradient(top, #ddd 0%,#c2c2c2 100%);
-    border: 1px solid #999;
-    display: block;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.side .menu div a {
-    padding: 5px 18px;
-    text-decoration: none;
-    font-size: 14px;
-    color: rgba(0,0,0,0.7);
-    display: block;
-    cursor: pointer;
-    transition: 0.2s;
-    background: linear-gradient(top, #fff 0%, #e2e2e2 100%);
-    background: -moz-linear-gradient(top, #fff 0%, #e2e2e2 100%);
-    background: -webkit-linear-gradient(top, #fff 0%,#e2e2e2 100%);
-    background:-o-linear-gradient(top, #fff 0%,#e2e2e2 100%);
-    background:-ms-linear-gradient(top, #fff 0%,#e2e2e2 100%);
-    border: 1px solid rgba(0,0,0,0.5) !important;
-}
-
-.side .menu > a:first-child {
-    border-radius: 10px 10px 0 0;
-}
-
-.side .menu > a:last-child {
-    border-radius: 0 0 10px 10px;
-}
-
-.side .menu a:hover {
-    color: rgba(0,0,0,1);
-    transform: scale(1.1);
-    z-index: 1;
-}
-
-.side .menu a:active {
-    background: linear-gradient(top, #e2e2e2 0%, #fff 100%);
-    background: -moz-linear-gradient(top, #e2e2e2 0%, #fff 100%);
-    background: -webkit-linear-gradient(top, #e2e2e2 0%,#fff 100%);
-    background:-o-linear-gradient(top, #e2e2e2 0%,#fff 100%);
-    background:-ms-linear-gradient(top, #e2e2e2 0%,#fff 100%);
-}
-
-.order_table .price a {
-    color: #333;
-    font-size: 16px;
-}
-
-.order_table .order a {
-    color: #33a;
-    font-size: 16px;
-}
-
-.order_table .date {
-    color: #777;
-    font-size: 12px;
-}
-
-
-
-a.delete-link {
-    display: inline-block;
-    background-color: #f00;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 3px;
-    font-weight: bold;
-    opacity: 0.5;
-    padding: 2px 6px;
-}
-
-a.delete-link:hover {
-    opacity: 1;
-}
-
-a.closeButton {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 30px;
-    text-align: center;
-    font-family: arial;
-    font-size: 24px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    padding: 0;
-    display: block;
-    z-index: 3;
-    color: rgba(200, 0, 0, 0.5);
-}
-
-a.closeButton:hover {
-    background-color: rgba(255, 255, 255, 0.8);
-    color: rgba(200, 0, 0, 0.8);
-    text-decoration: none;
-}
-
-a.thumbnail-delete {
-    color: red;
-    position:absolute;
-    top:0;
-    right: 5px;
-    font-size: 20px;
-    opacity: 0.5;
-}
-
-a.thumbnail-delete:hover {
-    opacity: 1;
-}
-
-a.thumbnail-delete * {
-    color: red;
-}
-
-input[type="checkbox"], label img {
-    vertical-align: middle;
-}
-
-input[type="checkbox"].checkbox_after ~ label {
-    opacity: 0.5;
-}
-
-input[type="checkbox"].checkbox_after:checked ~ label {
-    opacity: 1;
-}
-
-#product_images {
-    cursor: pointer;
-}
-
-.old_images span {
-    position: relative;
-    display: inline-block;
-}
-
-.old_images span a.delete {
-    position: absolute;
-    top: 0;
-    right: 5px;
-    font-size: 20px;
-    opacity: 0.5;
-    cursor: pointer;
-}
-
-.old_images span a.delete * {
-    color: red;
-}
-
-.old_images span a.delete:hover {
-    opacity: 1;
-}
-
-.right-add-button {
-    position: absolute;
-    right:4px;
-    top:-4px;
-    font-size: 30px;
-    text-shadow: 0 0 1px 1px #000;
-    color: #007;
-    opacity: 0.5;
-    cursor: pointer;
-}
-
-.right-add-button:hover {
-    opacity: 1;
-}
-
-.delete-icon {
-    opacity: 0.5;
-    color: red;
-    font-size: 14px;
-}
-
-.delete-icon:hover {
-    opacity: 1;
-}
-
-@media (min-width: 100px) and (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
-    .burger {
-        display: block !important;
-    }
-}
-
-#normal_url_example, #collection_url_example {
-    display: none;
-}
+body {    font-family: "Lato", sans-serif;}.inline-block {	display: inline-block;}.side-menu {	padding-top: 20px;	text-align: center;}
+.contact_table td {    height: 42px;}
+.side .menu {	margin: 15px 0;	display:inline-block;	text-align: center;	border-radius: 10px;    border: 1px solid rgba(0,0,0,0.3);    box-shadow: 0 0 15px 15px rgba(0,0,0,0.3);}
+.side .menu > a {    padding: 5px 30px;    text-decoration: none;    font-size: 20px;    color: rgba(0,0,0,0.7);    background: linear-gradient(top, #ddd 0%, #c2c2c2 100%);    background: -moz-linear-gradient(top, #ddd 0%, #c2c2c2 100%);    background: -webkit-linear-gradient(top, #ddd 0%,#c2c2c2 100%);    background:-o-linear-gradient(top, #ddd 0%,#c2c2c2 100%);    background:-ms-linear-gradient(top, #ddd 0%,#c2c2c2 100%);    border: 1px solid #999;	display: block;    cursor: pointer;    transition: 0.2s;}
+.side .menu div a {    padding: 5px 18px;    text-decoration: none;    font-size: 14px;    color: rgba(0,0,0,0.7);	display: block;	cursor: pointer;    transition: 0.2s;    background: linear-gradient(top, #fff 0%, #e2e2e2 100%);    background: -moz-linear-gradient(top, #fff 0%, #e2e2e2 100%);    background: -webkit-linear-gradient(top, #fff 0%,#e2e2e2 100%);    background:-o-linear-gradient(top, #fff 0%,#e2e2e2 100%);    background:-ms-linear-gradient(top, #fff 0%,#e2e2e2 100%);    border: 1px solid rgba(0,0,0,0.5) !important;}
+.side .menu > a:first-child {	border-radius: 10px 10px 0 0;}
+.side .menu > a:last-child {	border-radius: 0 0 10px 10px;}
+.side .menu a:hover {	color: rgba(0,0,0,1);	transform: scale(1.1);	z-index: 1;}
+.side .menu a:active {	background: linear-gradient(top, #e2e2e2 0%, #fff 100%);	background: -moz-linear-gradient(top, #e2e2e2 0%, #fff 100%);	background: -webkit-linear-gradient(top, #e2e2e2 0%,#fff 100%);	background:-o-linear-gradient(top, #e2e2e2 0%,#fff 100%);	background:-ms-linear-gradient(top, #e2e2e2 0%,#fff 100%);}
+.order_table .price a {    color: #333;    font-size: 16px;}
+.order_table .order a {    color: #33a;    font-size: 16px;}
+.order_table .date {    color: #777;    font-size: 12px;}a.delete-link {    display: inline-block;    background-color: #f00;    color: #fff;    text-decoration: none;    border-radius: 3px;    font-weight: bold;    opacity: 0.5;    padding: 2px 6px;}
+a.delete-link:hover {    opacity: 1;}
+a.closeButton {	position: absolute;	right: 5px;	top: 5px;	width: 30px;	text-align: center;	font-family: arial;	font-size: 24px;	background-color: rgba(255, 255, 255, 0.5);	border-radius: 50%;	padding: 0;	display: block;	z-index: 3;	color: rgba(200, 0, 0, 0.5);}
+a.closeButton:hover {	background-color: rgba(255, 255, 255, 0.8);	color: rgba(200, 0, 0, 0.8);	text-decoration: none;}
+a.thumbnail-delete {	color: red;	position:absolute;	top:0;	right: 20px;	font-size: 20px;	opacity: 0.5;}
+a.thumbnail-delete:hover {	opacity: 1;}
+a.thumbnail-delete * {	color: red;}
+input[type="checkbox"], label img {	vertical-align: middle;}
+input[type="checkbox"].checkbox_after ~ label {	opacity: 0.5;}
+input[type="checkbox"].checkbox_after:checked ~ label {	opacity: 1;}
+#product_images {	cursor: pointer;}
+.old_images span {	position: relative;	display: inline-block;}
+.old_images span a.delete {	position: absolute;	top: 0;	right: 5px;	font-size: 20px;	opacity: 0.5;	cursor: pointer;}
+.old_images span a.delete * {	color: red;}
+.old_images span a.delete:hover {	opacity: 1;}
+.right-add-button {	position: absolute;	right:4px;	top:-4px;	font-size: 30px;	text-shadow: 0 0 1px 1px #000;	color: #007;	opacity: 0.5;	cursor: pointer;}
+.right-add-button:hover {	opacity: 1;}
+.delete-icon {	opacity: 0.5;	color: red;	font-size: 14px;}
+.delete-icon:hover {	opacity: 1;}
+@media (min-width: 100px) and (max-width: 768px) {	.sidebar {		display: none;	}
+	.burger {		display: block !important;	}}
+#normal_url_example, #collection_url_example {    display: none;}

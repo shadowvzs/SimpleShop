@@ -1,5 +1,6 @@
-<div class="container mt-3">
+<div style="padding: 0 15px;">
     <div id="Slides" class="carousel slide">
+
         <ul class="carousel-indicators">
             @foreach ($slides as $key => $slide)
                 <li class="item{{ $key }} {{ $key == 0 ? 'active' : ''}}" data-slide-to="{{ $key }}" data-target=".carousel.slide"></li>
@@ -7,11 +8,11 @@
         </ul>
 
         <div class="carousel-inner">
-            @foreach ($slides as $key => $slide)
-                <div class="carousel-item {{ $key == 0 ? 'active' : ''}}">
-                    <img src="{{ asset('img/slides/'.$slide['image']) }}" width="1100" height="500">
-                </div>
-            @endforeach
+          @foreach ($slides as $key => $slide)
+              <div class="carousel-item {{ $key == 0 ? 'active' : ''}}">
+                  <img src="{{ asset('img/slides/'.$slide['image']) }}" width="1100" height="500">
+              </div>
+          @endforeach
         </div>
 
         <a class="carousel-control-prev" href=".carousel.slide">
@@ -22,17 +23,16 @@
         </a>
     </div>
 </div>
-
 <script>
 $(document).ready(function(){
     var Slides = $("#Slides");
     Slides.carousel();
     $(".carousel-control-prev").click(function(e){
-        e.preventDefault();
+		e.preventDefault();
         Slides.carousel("prev");
     });
     $(".carousel-control-next").click(function(e){
-        e.preventDefault();
+		e.preventDefault();
         Slides.carousel("next");
     });
 });
