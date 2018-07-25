@@ -47,7 +47,7 @@ class Product extends Model {
 		$links = [];
 		$language = $option['language'] ?? \App\Language::getLocale();
  	    $products = Product::where('status', 1);
- 	    $limit = empty($option['page_limit']) ? 4 : intval($option['page_limit']);
+ 	    $limit = empty($option['page_limit']) ? 10 : intval($option['page_limit']);
 		$page_index = !empty($option['page_index']) ? explode('page_', $option['page_index'])[1] : 0;
 		$min_price = $option['min_price'] ?? false;
 		$max_price = $option['max_price'] ?? false;
@@ -59,17 +59,23 @@ class Product extends Model {
 		$pagination_range = 3;
 		$sort_by = $option['sortby'] ?? "";
 		$link = [];
+		$post_sort = false;
+		$post_sort_fields = ['name'];
 
  	    if (!empty($option['sortby'])) {
 			$order = explode('-', $option['sortby']);
 			$order_dir = $order[1] ?? 'ASC';
 			$order_field = $order[0];
-			if ($order_field == "price") {
-				$order_field = "total_price";
+			if (in_array($order_field, $post_sort_fields)) {
+				$post_sort = true;
+			} else {
+				if ($order_field == "price") {
+					$order_field = "total_price";
+				}
+	 	    	$products = $products->orderBy($order_field, $order_dir);
+				$link[] = "order_field=".$order_field;
+				$link[] = "order_dir=".$order_dir;
 			}
- 	    	$products = $products->orderBy($order_field, $order_dir);
-			$link[] = "order_field=".$order_field;
-			$link[] = "order_dir=".$order_dir;
  	    }
 
  	    if (!empty($option['category'])) {
@@ -171,12 +177,23 @@ class Product extends Model {
 					$links[] = ['>>', 'last', $max_count-1, $index < $max_count ? '' : 'disabled'];
 				}
 			}
+			if ($post_sort) {
+				// sorting ater name
+				usort($products, function ($a, $b) use ($order_dir, $order_field) {
+					return $order_dir == 'ASC'
+									? strcmp($a['name'], $b[$order_field])
+									: strcmp($b['name'], $a[$order_field]);
+				});
+			} else {
+				//sorting only
+				$products = array_values($products);
+			}
  	    } else {
 			$products = [];
 		}
 
  	    return [
- 		    'products' => array_values($products),
+ 		    'products' => $products,
 			'page_id' => 3,
  		    'page' => [
  			    'meta_title' => $cat['meta_title'] ?? $title,

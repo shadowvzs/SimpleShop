@@ -18,7 +18,6 @@ class PageController extends Controller {
 
         $language = \App\Language::getLocale();
         $slides = false;
-        $recommend = false;
         $page = Translation::where('field', 'url')
                     ->where('value', '/'.strtolower($slug))
                     ->where('model', 'Page')
@@ -50,12 +49,19 @@ class PageController extends Controller {
             );
   			$page['content'] = str_replace($search, $replace, nl2br($page['content']));
   			for ($i=10;$i>=0;$i--) {
-  				if (empty($products[$i]) || empty($products[$i]['slug'])) { continue; }
-  				$page['content'] = str_replace('#product*'.$i.'#', '<div class="col"><a href="/prod/'.$products[$i]['slug'].'" title="'.$products[$i]['name'].'" class="prod_thumbnail"><img src="'.$PROD_PATH.$products[$i]['main_image'].'" alt="Cover"></a></div>', $page['content']);
+                $str = '#product*'.$i.'#';
+                if (preg_match('/'."\#product\*$i\#".'/im', $page['content'])) {
+                    $page['content'] = str_replace($str, '', $page['content']);
+                } else {
+                    unset($products[$i]);
+                }
+                //$page['content'] = str_replace('#product*'.$i.'#', '<div class="col-12 col-sm-6 col-md-4 col-lg-3"><a href="/prod/'.($products[$i]['slug'] ?? "").'" title="'.$products[$i]['name'].'" class="prod_thumbnail"><img src="'.$PROD_PATH.$products[$i]['main_image'].'" alt="Cover"></a></div>', $page['content']);
+                //$page['content'] = str_replace('#product*'.$i.'#', '<div class="col-12 col-sm-6 col-md-4 col-lg-3"><a href="/prod/'.($products[$i]['slug'] ?? "").'" title="'.$products[$i]['name'].'" class="prod_thumbnail"><img src="'.$PROD_PATH.$products[$i]['main_image'].'" alt="Cover"></a></div>', $page['content']);
   			}
 		} else {
 			 $page['content'] = "";
 		}
+
         return view('page.view',[
             'page' => $page,
             'cms' => $cms,
